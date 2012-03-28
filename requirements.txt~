@@ -1,0 +1,8 @@
+django
+pillow
+south
+django-debug-toolbar
+django-grappelli
+django-sitetree
+ipython
+mysql-python
