@@ -1,4 +1,5 @@
 # Django settings for pystars project.
+from django.core.urlresolvers import reverse
 import os
 
 DEBUG = True
@@ -139,6 +140,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 AUTH_PROFILE_MODULE = "pystars.apps.profiles.models.Profile"
+LOGIN_REDIRECT_URL = reverse('login_redirect_handler')
 
 if DEBUG:
     INSTALLED_APPS += ('debug_toolbar',)

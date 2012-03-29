@@ -17,11 +17,12 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^$', include('pystars.apps.main.urls')),
-
-    # Accounts
-    url(r'^accounts/register/$', 'registration.views.register',
-            {'backend': 'pystars.apps.profiles.backends.RegistrationBackend',
-             'form_class': RegistrationFormUniqueEmail, },
-        name='registration_register'),
-    url(r'^accounts/', include('pystars.apps.profiles.urls')),
+    url(r'^login_redirect_url/$',
+        'pystars.apps.main.views.login_redirect_handler',
+        name='login_redirect_handler'
+    ),
+    # Accounts. Registration, activation etc.
+    url(r'^accounts/', include('pystars.apps.registration.urls')),
+    # Profiles.
+    url(r'^profiles/', include('pystars.apps.profiles.urls')),
 )

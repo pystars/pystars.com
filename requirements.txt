@@ -1,5 +1,5 @@
 django
-django-registration
+django-registration==0.8
 pillow
 South
 django-extensions
