@@ -1,5 +1,4 @@
 # Django settings for pystars project.
-from django.core.urlresolvers import reverse
 import os
 
 DEBUG = True
@@ -12,15 +11,27 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+#        'NAME': 'pystars.db',                      # Or path to database file if using sqlite3.
+#        'USER': '',                      # Not used with sqlite3.
+#        'PASSWORD': '',                  # Not used with sqlite3.
+#        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+#        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+#    }
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'pystars.db',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'pystars',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'TEST_CHARSET': "utf8",
+        }
 }
 
 # Local time zone for this installation. Choices can be found here:
@@ -95,6 +106,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
+    'django.core.context_processors.request',
     "django.contrib.messages.context_processors.messages",
     'pystars.apps.profiles.context_processors.profile',
 )
@@ -115,20 +127,21 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # django-registration
-    'registration',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 
     # internal
+    'pystars.apps.registration',
     'pystars.apps.profiles',
 
     # external
     'django_extensions',
     'south',
     'bootstrapform',
+    # django-registration
+    'registration',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -140,7 +153,6 @@ AUTHENTICATION_BACKENDS = (
 )
 
 AUTH_PROFILE_MODULE = "pystars.apps.profiles.models.Profile"
-LOGIN_REDIRECT_URL = reverse('login_redirect_handler')
 
 if DEBUG:
     INSTALLED_APPS += ('debug_toolbar',)

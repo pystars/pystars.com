@@ -4,9 +4,15 @@ from django.contrib.auth import authenticate
 
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse_lazy
+
 from pystars.apps.profiles.models import Profile
 
 class LoginForm(AuthenticationForm):
+    next = forms.CharField(
+        initial=reverse_lazy('login_redirect_handler'),
+        widget=forms.HiddenInput)
+
     def clean(self):
         username = self.cleaned_data.get('username')
         password = self.cleaned_data.get('password')

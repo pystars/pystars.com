@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.core.exceptions import ObjectDoesNotExist
-from django.template import loader, Context
+from pystars.apps.profiles.models import Profile
 
 def profile(request):
     try:
-        profile = request.user.profile
+        profile = request.user
     except (AttributeError, ObjectDoesNotExist):
         profile = {}
 
     return {
-        'profile': profile,
+        'request': {'profile': profile}
     }

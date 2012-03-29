@@ -51,7 +51,7 @@
             </ul>
 
             {% if profile %}
-                <p class="navbar-text pull-right">Вы вошли как&nbsp;<a href="#">{{ profile.username }}</a></p>
+                <p class="navbar-text pull-right">Вы вошли как&nbsp;<a href="{% url profile_detail_by_username profile.username %}">{{ profile.username }}</a></p>
             {% else %}
                 <p class="navbar-text pull-right"><a href="{% url auth_login %}">Войти</a> или <a href="{% url registration_register %}">Зарегистрироваться</a></p>
             {% endif %}

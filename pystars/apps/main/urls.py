@@ -7,5 +7,4 @@ urlpatterns = patterns('',
         template_name='base.html'),
         name='index',
     ),
-
 )

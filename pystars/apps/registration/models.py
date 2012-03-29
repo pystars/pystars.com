@@ -3,7 +3,6 @@ import datetime
 import hashlib
 import random
 import re
-from pystars.apps.profiles.models import Profile
 
 try:
     from django.utils.timezone import now as datetime_now
@@ -16,6 +15,8 @@ from django.conf import settings
 from django.db import models, transaction
 from django.contrib.auth.models import User
 
+from pystars.apps.profiles.models import Profile
+
 SHA1_RE = re.compile('^[a-f0-9]{40}$')
 
 class RegistrationManager(models.Manager):
@@ -26,7 +27,7 @@ class RegistrationManager(models.Manager):
             except self.model.DoesNotExist:
                 return False
             if not profile.activation_key_expired():
-                user = profile.user
+                user = profile.profile
                 user.is_active = True
                 user.save()
                 profile.activation_key = self.model.ACTIVATED
@@ -36,7 +37,7 @@ class RegistrationManager(models.Manager):
 
     def create_inactive_user(self, username, email, password,
                              site, send_email=True):
-        new_user = Profile.user_manager.create_user(username, email, password)
+        new_user = Profile.objects.create_user(username, email, password)
         new_user.is_active = False
         new_user.save()
 
@@ -54,7 +55,7 @@ class RegistrationManager(models.Manager):
         if isinstance(username, unicode):
             username = username.encode('utf-8')
         activation_key = hashlib.sha1(salt+username).hexdigest()
-        return self.create(user=user,
+        return self.create(profile=user,
             activation_key=activation_key)
 
     def delete_expired_users(self):
@@ -72,7 +73,7 @@ class RegistrationManager(models.Manager):
 class RegistrationProfile(models.Model):
     ACTIVATED = u"ALREADY_ACTIVATED"
 
-    user = models.ForeignKey(Profile, related_name='user', unique=True, verbose_name=_('user'))
+    profile = models.ForeignKey(Profile, related_name='profile', unique=True, verbose_name=_('user'))
     activation_key = models.CharField(_('activation key'), max_length=40)
 
     objects = RegistrationManager()
@@ -80,14 +81,15 @@ class RegistrationProfile(models.Model):
     class Meta:
         verbose_name = _('registration profile')
         verbose_name_plural = _('registration profiles')
+        #db_table = 'asdasd'
 
     def __unicode__(self):
-        return u"Registration information for %s" % self.user
+        return u"Registration information for %s" % self.profile
 
     def activation_key_expired(self):
         expiration_date = datetime.timedelta(days=settings.ACCOUNT_ACTIVATION_DAYS)
         return self.activation_key == self.ACTIVATED or\
-               (self.user.date_joined + expiration_date <= datetime_now())
+               (self.profile.date_joined + expiration_date <= datetime_now())
     activation_key_expired.boolean = True
 
     def send_activation_email(self, site):
@@ -102,4 +104,4 @@ class RegistrationProfile(models.Model):
         message = render_to_string('registration/activation_email.txt',
             ctx_dict)
 
-        self.user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)
+        self.profile.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)

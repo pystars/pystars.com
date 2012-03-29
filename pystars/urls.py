@@ -1,5 +1,4 @@
 from django.conf.urls import patterns, include, url
-from registration.forms import RegistrationFormUniqueEmail
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -17,7 +16,8 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^$', include('pystars.apps.main.urls')),
-    url(r'^login_redirect_url/$',
+
+    url(r'^login_redirect_url/',
         'pystars.apps.main.views.login_redirect_handler',
         name='login_redirect_handler'
     ),

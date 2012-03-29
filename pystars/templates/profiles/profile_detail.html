@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if object.id == request.profile.id %}
+        Ваш профиль
+    {% else %}
+        Профиль пользователя {{ object.username }}
+    {% endif %}
+{% endblock %}
+
+{% block page_content %}
+    <div class="row-fluid">
+        {% if object.id == request.profile.id %}
+        <h3>Ваш профиль</h3>
+        {% else %}
+        <h3>Профиль пользователя {{ object.username }}</h3>
+        {% endif %}
+
+        {% if object.id == request.profile.id %}
+        <a class="btn" href="#">Изменить</a>
+        {% endif %}
+    </div>
+{% endblock %}
