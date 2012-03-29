@@ -50,8 +50,8 @@
               <li><a href="#contact">Контакты</a></li>
             </ul>
 
-            {% if profile %}
-                <p class="navbar-text pull-right">Вы вошли как&nbsp;<a href="{% url profile_detail_by_username profile.username %}">{{ profile.username }}</a></p>
+            {% if request.profile %}
+                <p class="navbar-text pull-right">Вы вошли как&nbsp;<a href="{% url profile_detail_by_username request.profile.username %}">{{ request.profile.username }}</a></p>
             {% else %}
                 <p class="navbar-text pull-right"><a href="{% url auth_login %}">Войти</a> или <a href="{% url registration_register %}">Зарегистрироваться</a></p>
             {% endif %}
