@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block page_content %}
+    <div class="row-fluid">
+        <h2>Регистрация</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form|bootstrap }}
+            <input class="btn btn-primary" type="submit" value="Зарегистрироваться">
+        </form>
+        <a href="{% url auth_login %}">Войти</a>
+    </div>
+{% endblock %}

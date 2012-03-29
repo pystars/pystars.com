@@ -1,9 +1,12 @@
 django
+django-registration
 pillow
-south
+South
 django-extensions
 django-debug-toolbar
 django-grappelli
 django-sitetree
 ipython
 mysql-python
+fabric
+django-bootstrap-form

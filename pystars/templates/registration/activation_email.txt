@@ -1,0 +1,5 @@
+Для подтверждения регистрации пройдите по ссылке:
+{{ site }}{% url registration_activate activation_key %}
+Ссылка будет активна в течение {{ expiration_days }} дней.
+
+
