@@ -17,12 +17,13 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     url(r'^$', include('pystars.apps.main.urls')),
 
-    url(r'^login_redirect_url/',
-        'pystars.apps.main.views.login_redirect_handler',
-        name='login_redirect_handler'
-    ),
+#    url(r'^login_redirect_url/',
+#        'pystars.apps.main.views.login_redirect_handler',
+#        name='login_redirect_handler'
+#    ),
     # Accounts. Registration, activation etc.
     url(r'^accounts/', include('pystars.apps.registration.urls')),
     # Profiles.
     url(r'^profiles/', include('pystars.apps.profiles.urls')),
+    url(r'^articles/', include('pystars.apps.articles.urls')),
 )

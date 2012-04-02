@@ -19,6 +19,7 @@
       }
     </style>
     <link href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" rel="stylesheet">
+    {% block css %}{% endblock %}
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
       <!--[if lt IE 9]>
@@ -30,6 +31,10 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+
+    <script src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    {% block head_js %}{% endblock %}
   </head>
 
   <body>
@@ -50,7 +55,7 @@
               <li><a href="#contact">Контакты</a></li>
             </ul>
 
-            {% if request.profile %}
+            {% if request.profile.username %}
                 <p class="navbar-text pull-right">Вы вошли как&nbsp;<a href="{% url profile_detail_by_username request.profile.username %}">{{ request.profile.username }}</a></p>
             {% else %}
                 <p class="navbar-text pull-right"><a href="{% url auth_login %}">Войти</a> или <a href="{% url registration_register %}">Зарегистрироваться</a></p>
@@ -63,9 +68,8 @@
 
     <div class="container-fluid">
       <div class="row-fluid">
-        {% block page_content %}
         <div class="span9">
-
+          {% block page_content %}
           <div class="row-fluid">
               <h2><small>03.12.12</small>&nbsp;<a href="#">42 Magnets — стартап за один день</a></h2>
                 <p>
@@ -75,30 +79,31 @@
                 </p>
               <p><a class="btn" href="#">Читать полностью &raquo;</a></p>
           </div><!--/row-->
+          {% endblock %}
         </div><!--/span-->
-
-          <div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li class="active"><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li class="nav-header">Sidebar</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li class="nav-header">Sidebar</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
+          {% block right_menu %}
+            <div class="span3">
+              <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                  <li class="nav-header">Действия</li>
+                  <li class="active"><a href="#">Link</a></li>
+                  <li><a href="#">Link</a></li>
+                  <li><a href="#">Link</a></li>
+                  <li><a href="#">Link</a></li>
+                  <li class="nav-header">Sidebar</li>
+                  <li><a href="#">Link</a></li>
+                  <li><a href="#">Link</a></li>
+                  <li><a href="#">Link</a></li>
+                  <li><a href="#">Link</a></li>
+                  <li><a href="#">Link</a></li>
+                  <li><a href="#">Link</a></li>
+                  <li class="nav-header">Sidebar</li>
+                  <li><a href="#">Link</a></li>
+                  <li><a href="#">Link</a></li>
+                  <li><a href="#">Link</a></li>
+                </ul>
+              </div><!--/.well -->
+            </div><!--/span-->
         {% endblock %}
       </div><!--/row-->
 
@@ -108,10 +113,8 @@
         <p><a href="{% url index %}">&copy; PyStars 2012</a></p>
       </footer>
 
-    </div><!--/.fluid-container-->
+    </div>
 
-    <script src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
-
+  {% block bottom_js %}{% endblock %}
   </body>
 </html>

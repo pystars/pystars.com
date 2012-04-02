@@ -123,6 +123,8 @@ INSTALLED_APPS = (
     # internal
     'pystars.apps.registration',
     'pystars.apps.profiles',
+    'pystars.apps.articles',
+    'pystars.apps.utils',
 
     # external
     'django_extensions',
@@ -130,6 +132,9 @@ INSTALLED_APPS = (
     'bootstrapform',
     # django-registration
     'registration',
+    'reversion',
+    'tagging',
+    'markitup',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -142,25 +147,25 @@ AUTHENTICATION_BACKENDS = (
 
 AUTH_PROFILE_MODULE = "pystars.apps.profiles.models.Profile"
 
-if DEBUG:
-    INSTALLED_APPS += ('debug_toolbar',)
-
-    DEBUG_TOOLBAR_PANELS = (
-        'debug_toolbar.panels.version.VersionDebugPanel',
-        'debug_toolbar.panels.timer.TimerDebugPanel',
-        'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
-        'debug_toolbar.panels.headers.HeaderDebugPanel',
-        'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
-        'debug_toolbar.panels.template.TemplateDebugPanel',
-        'debug_toolbar.panels.sql.SQLDebugPanel',
-        'debug_toolbar.panels.signals.SignalDebugPanel',
-        'debug_toolbar.panels.logger.LoggingPanel',
-    )
-
-    INTERNAL_IPS = ('127.0.0.1',)
-    DEBUG_TOOLBAR_CONFIG = dict(
-        INTERCEPT_REDIRECTS=False
-    )
+#if DEBUG:
+#    INSTALLED_APPS += ('debug_toolbar',)
+#
+#    DEBUG_TOOLBAR_PANELS = (
+#        'debug_toolbar.panels.version.VersionDebugPanel',
+#        'debug_toolbar.panels.timer.TimerDebugPanel',
+#        'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+#        'debug_toolbar.panels.headers.HeaderDebugPanel',
+#        'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+#        'debug_toolbar.panels.template.TemplateDebugPanel',
+#        'debug_toolbar.panels.sql.SQLDebugPanel',
+#        'debug_toolbar.panels.signals.SignalDebugPanel',
+#        'debug_toolbar.panels.logger.LoggingPanel',
+#    )
+#
+#    INTERNAL_IPS = ('127.0.0.1',)
+#    DEBUG_TOOLBAR_CONFIG = dict(
+#        INTERCEPT_REDIRECTS=False
+#    )
 
 try:
     from pystars.local_settings import *

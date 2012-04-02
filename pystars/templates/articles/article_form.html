@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% block title %}Новый материал{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}markitup/skins/simple/style.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}markitup/sets/bbcode/style.css" />
+{% endblock %}
+
+{% block head_js %}
+    <script src="{{ STATIC_URL }}markitup/jquery.markitup.js"></script>
+    <script src="{{ STATIC_URL }}markitup/sets/bbcode/set.js"></script>
+{% endblock %}
+
+{% block page_content %}
+    <div class="row-fluid">
+        <h2>Новый материал</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form|bootstrap }}
+{#            {{ form }}#}
+            {% if form.instance.id %}
+            <input class="btn btn-primary" type="submit" value="Сохранить">
+            {% else %}
+            <input class="btn btn-primary" type="submit" value="Создать">
+            {% endif %}
+        </form>
+    </div>
+{% endblock %}
+
+{% block bottom_js %}
+    <script language="javascript">
+    $('#id_text').markItUp(mySettings);
+        $(function() {
+
+        });
+    </script>
+{% endblock %}

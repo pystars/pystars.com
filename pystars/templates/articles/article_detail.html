@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load tagging_tags %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}highlight/styles/solarized_light.css" />
+{% endblock %}
+
+{% block head_js %}
+    <script src="{{ STATIC_URL }}highlight/highlight.pack.js"></script>
+{% endblock %}
+
+{% block page_content %}
+    <div class="row-fluid">
+        <h3>{{ object.title }}</h3>
+        <div class="article-text">
+        {{ object.rendered_text|safe }}
+        </div>
+
+        {% tags_for_object object as tags %}
+
+        {% for tag in tags %}
+            <a href="#">{{ tag }}</a>&nbsp;
+        {% endfor %}
+
+    </div>
+{% endblock %}
+
+{% block right_menu %}
+    <div class="span3">
+      <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+          {% if object.author.id == request.profile.id %}
+          <li class="nav-header">Действия</li>
+          <li class="active"><a href="{% url edit_article object.id %}">Редактировать</a></li>
+          <li><a href="#">Link</a></li>
+          {% endif %}
+        </ul>
+      </div><!--/.well -->
+    </div><!--/span-->
+{% endblock %}
+
+{% block bottom_js %}
+    <script>
+        $(function() {
+            $('div pre').each(function(i, e) {
+                hljs.highlightBlock(e, '    ')
+            });
+        });
+    </script>
+{% endblock %}

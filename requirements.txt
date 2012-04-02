@@ -10,3 +10,7 @@ ipython
 mysql-python
 fabric
 django-bootstrap-form
+django-reversion
+django-markitup
+postmarkup
+django-tagging

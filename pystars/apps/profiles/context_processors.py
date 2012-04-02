@@ -6,7 +6,7 @@ def profile(request):
     try:
         profile = request.user
     except (AttributeError, ObjectDoesNotExist):
-        profile = {}
+        profile = None
 
     return {
         'request': {'profile': profile}
