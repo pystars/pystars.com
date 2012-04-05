@@ -1,0 +1,11 @@
+[
+    {
+        "pk": 1, 
+        "model": "profiles.profile", 
+        "fields": {
+            "website": null, 
+            "user_permissions": [], 
+            "groups": []
+        }
+    }
+]
