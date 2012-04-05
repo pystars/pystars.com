@@ -8,6 +8,8 @@ from registration.forms import RegistrationFormUniqueEmail
 from pystars.apps.profiles.forms import LoginForm
 
 urlpatterns = patterns('',
+    # url(r'', include('social_auth.urls')),
+    
     url(r'^register/$', 'registration.views.register',
             {'backend': 'pystars.apps.registration.backends.RegistrationBackend',
              'form_class': RegistrationFormUniqueEmail, },

@@ -7,10 +7,10 @@ from pystars.apps.profiles.models import Profile
 
 
 class ProfileDetailView(DetailView):
-    object = Profile
+    model = Profile
 
     def get_object(self, queryset=None):
         try:
-            return Profile.objects.get(username=self.kwargs.get('username'))
+            return self.model.objects.get(username=self.kwargs['username'])
         except ObjectDoesNotExist:
             raise Http404

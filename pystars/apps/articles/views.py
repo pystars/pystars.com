@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseNotAllowed
-from django.shortcuts import redirect
-from django.views.generic import DetailView
+from django.shortcuts import redirect, render_to_response, get_object_or_404
+from django.views.generic import DetailView, ListView
 from django.views.generic.edit import UpdateView, CreateView
+from tagging.models import TaggedItem, Tag
+
 from pystars.apps.articles.forms import CreateArticleForm, EditArticleForm
 from pystars.apps.articles.models import Article
 
@@ -45,3 +47,16 @@ class ArticleEditView(UpdateView):
 
     def get_success_url(self):
         return reverse('detail_article', args=[self.kwargs['pk']])
+
+
+class TaggedListView(ListView):
+    model = Article
+
+    def get_context_data(self, **kwargs):
+        ctx = super(TaggedListView, self).get_context_data(**kwargs)
+        ctx.update({'tag': self.kwargs['tag']})
+        return ctx
+
+    def get_queryset(self):
+        tag = get_object_or_404(Tag, name=self.kwargs['tag'])
+        return TaggedItem.objects.get_by_model(self.model, tag)

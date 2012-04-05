@@ -135,6 +135,7 @@ INSTALLED_APPS = (
     'reversion',
     'tagging',
     'markitup',
+    # 'social_auth',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -142,8 +143,17 @@ ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_OPEN = True
 
 AUTHENTICATION_BACKENDS = (
+    # 'social_auth.backends.contrib.github.GithubBackend',
+
     'pystars.apps.profiles.backends.ProfileAuthenticationBackend',
 )
+
+# Social Auth settings section
+# GITHUB_APP_ID = '82d16c81db28bee3bc19'
+# GITHUB_API_SECRET = 'a004c481cc65383adba479cacc6976d4cc1b4e30'
+
+#SOCIAL_AUTH_USER_MODEL = 'pystars.apps.profiles.models.Profile'
+###############################################################################
 
 AUTH_PROFILE_MODULE = "pystars.apps.profiles.models.Profile"
 

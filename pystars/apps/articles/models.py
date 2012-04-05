@@ -30,4 +30,5 @@ class Article(models.Model):
     def get_tags(self, tags):
         return Tag.objects.get_for_object(self)
 
+
 reversion.register(Article)

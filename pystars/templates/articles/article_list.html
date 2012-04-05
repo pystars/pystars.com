@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load tagging_tags %}
 
-{% block title %}{{ object.title }}{% endblock %}
+{% block title %}{{ request.tag }}{% endblock %}
 
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}highlight/styles/solarized_light.css" />
@@ -12,8 +12,9 @@
 {% endblock %}
 
 {% block page_content %}
+    {% for object in object_list %}
     <div class="row-fluid">
-        <h3>{{ object.title }}</h3>
+        <h2><a href="{% url detail_article object.id %}">{{ object.title }}</a></h2>
         <div class="article-text">
         {{ object.rendered_text|safe }}
         </div>
@@ -23,6 +24,7 @@
         {% include "articles/snippets/object_tags.html" %}
 
     </div>
+    {% endfor %}
 {% endblock %}
 
 {% block right_menu %}
