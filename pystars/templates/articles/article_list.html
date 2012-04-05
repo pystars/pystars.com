@@ -16,13 +16,16 @@
     <div class="row-fluid">
         <h2><a href="{% url detail_article object.id %}">{{ object.title }}</a></h2>
         <div class="article-text">
-        {{ object.rendered_text|safe }}
+        {{ object.rendered_text|safe|truncatewords_html:60 }}
         </div>
 
         {% tags_for_object object as tags %}
-
-        {% include "articles/snippets/object_tags.html" %}
-
+        <p>
+            {% include "articles/snippets/object_tags.html" %}
+        </p>
+        <p>
+            <a class="btn" href="{% url detail_article object.id %}">Читать полностью</a>
+        </p>
     </div>
     {% endfor %}
 {% endblock %}
@@ -34,7 +37,6 @@
           {% if object.author.id == request.profile.id %}
           <li class="nav-header">Действия</li>
           <li class="active"><a href="{% url edit_article object.id %}">Редактировать</a></li>
-          <li><a href="#">Link</a></li>
           {% endif %}
         </ul>
       </div><!--/.well -->
