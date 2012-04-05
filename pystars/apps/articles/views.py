@@ -45,6 +45,13 @@ class ArticleEditView(UpdateView):
         else:
             raise HttpResponseNotAllowed()
 
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.author = self.request.user
+        instance.rendered_text = render_bbcode(form.cleaned_data['text'])
+        instance.save()
+        return redirect(reverse('detail_article', args=[instance.id]))
+
     def get_success_url(self):
         return reverse('detail_article', args=[self.kwargs['pk']])
 

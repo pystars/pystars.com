@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load tagging_tags %}
+{% load comments %}
 
 {% block title %}{{ object.title }}{% endblock %}
 
@@ -21,7 +22,11 @@
         {% tags_for_object object as tags %}
 
         {% include "articles/snippets/object_tags.html" %}
+    </div>
 
+    <div class="row-fluid">
+        <h3>Комментарии</h3>
+        {% render_comment_form for object %}
     </div>
 {% endblock %}
 

@@ -26,4 +26,5 @@ urlpatterns = patterns('',
     # Profiles.
     url(r'^profiles/', include('pystars.apps.profiles.urls')),
     url(r'^articles/', include('pystars.apps.articles.urls')),
+    url(r'^comments/', include('django.contrib.comments.urls')),
 )
