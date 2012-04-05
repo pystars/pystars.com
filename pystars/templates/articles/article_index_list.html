@@ -13,7 +13,7 @@
 
 {% block page_content %}
     {% for object in object_list %}
-    <div class="row-fluid">
+        <div class="row-fluid">
         <h2><a href="{% url detail_article object.id %}">{{ object.title }}</a></h2>
         <div class="article-text">
         {{ object.rendered_text|safe|truncatewords_html:60 }}
@@ -21,7 +21,6 @@
 
         {% tags_for_object object as tags %}
         <p>
-
             {% include "articles/snippets/object_tags.html" %}
         </p>
         <p>
@@ -29,19 +28,6 @@
         </p>
     </div>
     {% endfor %}
-{% endblock %}
-
-{% block right_menu %}
-    <div class="span3">
-      <div class="well sidebar-nav">
-        <ul class="nav nav-list">
-          {% if object.author.id == request.profile.id %}
-          <li class="nav-header">Действия</li>
-          <li class="active"><a href="{% url edit_article object.id %}">Редактировать</a></li>
-          {% endif %}
-        </ul>
-      </div><!--/.well -->
-    </div><!--/span-->
 {% endblock %}
 
 {% block bottom_js %}

@@ -1,0 +1,13 @@
+{% if request.profile.id %}
+<div class="span3">
+  <div class="well sidebar-nav">
+    <ul class="nav nav-list">
+      {% if request.profile == object.author %}
+      <li><a href="{% url edit_article object.id %}">Редактировать</a></li>
+      {% else %}
+          <li><a href="{% url create_article %}">Создать статью</a></li>
+      {% endif %}
+    </ul>
+  </div><!--/.well -->
+</div><!--/span-->
+{% endif %}

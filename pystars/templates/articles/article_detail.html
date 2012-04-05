@@ -31,17 +31,7 @@
 {% endblock %}
 
 {% block right_menu %}
-    <div class="span3">
-      <div class="well sidebar-nav">
-        <ul class="nav nav-list">
-          {% if object.author.id == request.profile.id %}
-          <li class="nav-header">Действия</li>
-          <li class="active"><a href="{% url edit_article object.id %}">Редактировать</a></li>
-          <li><a href="#">Link</a></li>
-          {% endif %}
-        </ul>
-      </div><!--/.well -->
-    </div><!--/span-->
+{% include "articles/snippets/sidemenu.html" %}
 {% endblock %}
 
 {% block bottom_js %}
